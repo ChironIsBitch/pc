@@ -1,0 +1,411 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" class="loading">
+<head>
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<meta name="viewport" content="width=device-width, initial-scale=0.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+<meta name="keywords" content="" />
+<meta name="description" content="设计师网站">
+<meta name="author" content="" />
+<link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta content="telephone=no" name="format-detection">
+<link rel="apple-touch-icon-precomposed" href="/static/images/favicon.ico">
+<script>
+var logined = 0
+</script>
+<title>适应手机触屏版HTML5手机网站模板</title>
+</head>
+
+<body>
+{#<br>#}
+{#<br>#}
+{#<br>#}
+{#<br>#}
+{#<form class="shuju" action="">py#}
+{#{{ form }}{% csrf_token %}</form>#}
+{#<button class="tijiao">提交</button>#}
+{#<script>#}
+{#    $('.tijiao').click(function () {#}
+{#        $.ajax({#}
+{#            url:'/',#}
+{#            type:'POST',#}
+{#            data:$('.shuju').serialize(),#}
+{#            success:function(data){alert(data)}#}
+{#        })#}
+{#    })#}
+{#</script>#}
+{#111111111111111111#}
+{##}
+{#<script>#}
+{#var now_page = 1,#}
+{#search_value = '';#}
+{#</script>#}
+
+		<div id="menu">
+		<div class="search_wrap">
+			<form action="" method="get">
+				<input type="text" name="search" class="search_input" placeholder="关键字查找" />
+				<i class="reset_input"><i></i></i>
+			</form>
+		</div>
+		<ul>
+			<li class="nav_index menu_cur"><a href="/"><i></i><span>拼车页</span><b></b><div class="clear"></div></a></li>
+			<li class="nav_site"><a href="/static/zhengwen.html"><i></i><span>旅游页</span><b></b><div class="clear"></div></a></li>
+			<li class="nav_help"><a href="/static/zhengwen.html"><i></i><span>资讯页</span><b></b><div class="clear"></div></a></li>
+			<li class="nav_about"><a href="/"><i></i><span>关于我们</span><b></b><div class="clear"></div></a></li>
+		</ul>
+	</div>
+		<div id="user">
+
+			<div class="pd10">
+                    {% if request.user.is_authenticated %}
+                        {% if request.user.is_active %}
+                        <h2 style="color:white;">登录成功</h2>
+                            <h3>信息大全: <br>{{ user.nick_name }}<br>{{ user.mobile }}</h3>
+
+                        <input type="button" value="退出登录" class="logout">
+                         {% else %}
+                            请输入:
+                        {% endif %}
+                    {% else %}
+            <div class="account">
+				<div class="login_b_t">
+
+					<div class="pd10">
+						<div class="fl">还没有账号<a id="reg_now" href="/static/" onclick="return false;">立即注册</a></div><div class="fr"><a href="/static/#">忘记密码?</a></div><div class="clear"></div>
+					</div>
+				</div>
+			</div>
+                        <form method="post" action="#" id="login_form">
+					<div class="login_b_i">
+						<div class="login_input">
+							<div class="login_user text_hover"><input type="text" name="username" placeholder="帐号" /><i></i></div>
+							<div class="login_password text_hover"><input type="password" name="password" placeholder="密码" /><i></i></div>
+						</div>
+					</div>
+                    <input type="button" value="登录" class="login_submit">
+                    {% csrf_token %}
+				</form>
+                    {% endif %}
+
+                <script>
+                    $(".login_submit").click(function(){
+                        $.ajax({
+                            url: '/login/',
+                            type:'POST',
+                            data:$("#login_form").serialize(),
+                            success:function(data){
+                                if(data =="false")
+                                {alert('账号或者密码错误,请重新输入')}
+                                else{window.location.reload()}
+                            }
+                        })
+                    });
+
+
+                    $('.logout').click(function(){
+                        $.get("/logout/",);
+                        setTimeout(function(){window.location.reload()}, 1000);
+
+
+
+                    })
+                </script>
+
+
+			</div>
+			</div>	
+	<div id="header">
+		<div class="wrap">
+			<i class="menu_open"></i>
+			<div class="logo"><a href="/" title="阳山啊"><img src="/static/css/logo.png" /></a></div>
+			<i class="search_open"></i>
+		</div>
+		<div class="logo_msk"></div>
+	</div>
+	<div id="container">
+		<div id="sort">
+			<table width="100%" border="0" cellspacing="0">
+				<tr>
+					<td class="sort_left">
+						<div class="sort_cate">
+							<div class="sort_b"><a href="/static/#" onclick="return false;"><div class="sort_b_inner"><i class="cate_default"></i><span>出发</span><div class="clear"></div></div></a></div>
+						</div>
+					</td>
+					<td>
+						<div class="sort_sort">
+							<div class="sort_b"><a href="/static/#" onclick="return false;"><div class="sort_b_inner"><i class="cate_sort"></i><span>到达</span><div class="clear"></div></div></a></div>
+						</div>
+					</td>
+					<td class="sort_right">
+						<div class="sort_tag">
+							<div class="sort_b"><a href="/static/#" onclick="return false;"><div class="sort_b_inner chufashijian"><i class="cate_tag"></i><span>出发时间</span><div class="clear"></div></div></a></div>
+						</div>
+					</td>
+                    <script>
+                       $(document).ready(function(){
+                           if ("{{ chufa }}" == "ys"){
+                              $(".sort_cate span").text('阳山')
+                           }
+                           else if ("{{ chufa }}" == "qy"){
+                              $(".sort_cate span").text('清远')
+                           }
+                           else if ("{{ chufa }}" == "gz"){
+                              $(".sort_cate span").text('广州')
+                           }
+                       });
+
+                       $(document).ready(function(){
+                           if ("{{ arrival }}" == "ys"){
+                              $(".sort_sort span").text('阳山')
+                           }
+                           else if ("{{ arrival }}" == "qy"){
+                              $(".sort_sort span").text('清远')
+                           }
+                           else if ("{{ arrival }}" == "gz"){
+                              $(".sort_sort span").text('广州')
+                           }
+                       });
+                       $(document).ready(function(){
+                           if ("{{ s_time }}" == "today"){
+                              $(".chufashijian span").text('今天')
+                           }
+                           else if ("{{ s_time }}" == "tomorrow"){
+                              $(".chufashijian span").text('明天')
+                           }
+                           else if ("{{ s_time }}" == "after"){
+                              $(".chufashijian span").text('后天')
+                           }
+                       })
+                    </script>
+				</tr>
+			</table>
+		</div>
+		<div class="copyrights">Collect from <a href="/static/http://www.cssmoban.com/" >网页模板</a></div>
+		<div id="content">
+
+
+
+
+
+        <div style="clear:both;"></div>
+
+			<div id="list">
+				<ul class="start_list">
+                {% for x in start %}
+                    <li>
+						<div class="wrap">
+							<a class="alist" vhref="/static/zhengwen.html">
+								<div class="list_litpic fl"><img src="{{ MEDIA_URL }}{{ x.start_img }}" /></div>
+								<div class="list_info">
+									<h4><b style="background:black;color:white;">出发:{{ x.get_start_choices_display }}</b>---<b style="background:black;color:white;">-到达:{{ x.get_end_choices_display }}</b></h4>
+									<h4 style="background:black;color:white;width:160px;">{{ x.start_time|date:"m月d日" }} <span style="background:red;color:white;">{{ x.start_time|date:"H i" }}左右</span></h4>
+									<div class="list_info_i">
+										<dl class="list_info_views">
+											<dt></dt>
+											<dd>6907</dd>
+											<div class="clear"></div>
+										</dl>
+										<dl class="list_info_comment">
+											<dt></dt>
+											<dd>5</dd>
+											<div class="clear"></div>
+										</dl>
+										<dl class="list_info_like">
+											<dt></dt>
+											<dd>8</dd>
+											<div class="clear"></div>
+										</dl>
+										<div class="clear"></div>
+									</div>
+								</div>
+								<div class="clear"></div>
+							</a>
+						</div>
+					</li>
+                    {% endfor %}
+									</ul>
+				<div class="list_loading"><i></i><span>努力加载中...</span></div>
+			</div>
+		</div>
+		
+		<div class="push_msk"></div>
+	</div>
+
+	<div id="sort_content">
+		<div class="asort">
+			<div class="hd">
+				<div class="wrap">
+					<div class="fl"><span>选择分类</span><div class="clear"></div></div>
+					<div class="fr"></div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="ct">
+				<div class="wrap">
+					<ul class="choose_cate">
+                        <a href="?start=ys"><li class="ys"><i style="background:none;width:10px;margin-right:0;" class="s"></i><span>阳山</span><i class="e"></i></li></a>
+                        <a href="?start=qy"><li c_data="25"><i style="background:none;width:10px;margin-right:0;" class="s"></i><span>清远</span><i class="e"></i></li></a>
+                        <a href="?start=gz"><li c_data="3"><i style="background:none;width:10px;margin-right:0;" class="s"></i><span>广州</span><i class="e"></i></li></a>
+
+																		</ul>
+                    <script>
+                        $(".choose_cate").click(function(){
+                            $("#sort_content").removeClass("show")
+                        });
+
+
+
+
+
+                    </script>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+				
+		<div class="asort">
+			<div class="hd">
+				<div class="wrap">
+					<div class="fl"><span>选择排序</span><div class="clear"></div></div>
+					<div class="fr"></div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="ct">
+				<div class="wrap">
+					<ul class="choose_sort">
+                        <a href="?start={{ chufa }}&arrival=ys"><li ><i class="s"></i><span>阳山</span><i class="e"></i></li></a>
+                        <a href="?start={{ chufa }}&arrival=qy"><li><i class="s"></i><span>清远</span><i class="e"></i></li></a>
+                        <a href="?start={{ chufa }}&arrival=gz"><li><i class="s"></i><span>广州</span><i class="e"></i></li></a>
+											</ul>
+                                        <script>
+                        $(".choose_sort").click(function(){
+                            $("#sort_content").removeClass("show")
+                        })
+                    </script>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="asort">
+			<div class="hd">
+				<div class="wrap">
+					<div class="fl"><i></i><span>出发时间</span><div class="clear"></div></div>
+					<div class="fr"></div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="ct">
+				<div class="wrap">
+					<!--<h4 class="cate_trade"><i></i><span>行业</span></h4>-->
+					<ul class="start_time">
+                        <a class="jintian" href="?start={{ chufa }}&arrival={{ arrival }}&s_time=today"><li><i class="s"></i><span>今天</span><i class="today"></i></li></a>
+                        <a class="mingtian" href="?start={{ chufa }}&arrival={{ arrival }}&s_time=tomorrow"><li><i class="s"></i><span>明天</span><i class="tomorrow"></i></li></a>
+                        <a class="houtian" href="?start={{ chufa }}&arrival={{ arrival }}&s_time=after"><li><i class="s"></i><span>后天</span><i class="after"></i></li></a>
+											</ul>
+                    <script>
+                        $('.start_time li').click(function(){
+                            $('#sort_content').removeClass('show')
+                        });
+                        var mydate = new Date();
+                            $('.today').text('('+ mydate.getDate()+'日)');
+                        var mydate2 = new Date(mydate.setDate(mydate.getDate()+1));
+                            $(".tomorrow").text('('+ mydate2.getDate()+'日)');
+                        var mydate3 = new Date(mydate.setDate(mydate.getDate()+2));
+                            $(".after").text('('+ mydate3.getDate()+'日)');
+
+
+
+                    </script>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	
+	<div id="newwrap_t" class="newwrap">
+		<div class="newwrap_msk"></div>
+		<iframe id="newwrap" frameborder="0" width="100%" height="100%"></iframe>
+	</div>
+	<div id="reg_index">
+		<div class="reg_bar">
+			<div class="wrap">
+				<span class="fl"><i></i>注册帐号</span>
+				<i class="reg_bar_close fr"></i>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="wrap reg_ct">
+            <form method="post" action="#" id="register_form">
+                <div class="login_b_i"><br>
+                    <div class="login_input">
+                        <div class="login_user text_hover"><input type="text" name="r_username" placeholder="注册帐号" /><i></i></div>
+                        <div class="login_password text_hover"><input type="password" name="r_password" placeholder="注册密码" /><i></i></div>
+{#                        <input type="file" name="pic"><input type="button" value="上传" class="shangchuan">#}
+                        <div class="login_user text_hover"><input type="text" name="r_nickname" placeholder="昵称(姓名)" /><i></i></div>
+                        <div class="login_user text_hover"><input type="text" name="r_num" placeholder="手机号码" /><i></i></div>
+
+                    </div>
+                </div>
+                <input type="button" value="注册" class="register_submit login_submit ">
+                {% csrf_token %}
+            </form>
+            <style>.text_hover{transition-duration:1.5s;margin:5px;}
+                .text_hover:hover{box-shadow:inset  0px 0px 20px #5cebf3;}
+            </style>
+            <script>
+                $("shangchuan").click(function(){
+
+                });
+                $('.register_submit').click(function(){
+                    $.ajax({
+                        url:'/register/',
+                        type:'POST',
+                        processData : false,
+                        async:false,
+                        data:$("#register_form").serialize(),
+                        success:function(data){
+                            if (data == "1"){
+                                alert('用户已存在')
+                            };
+                            if (data == "2"){
+                                alert("注册成功")
+                                window.location.reload();
+                            }
+                        },
+                        })
+                })
+        $(".zhuce").focus(function(){
+            $(this).addClass("text_focus")
+        });
+        $(".zhuce").blur(function(){
+            $(this).removeClass("text_focus")
+        })
+
+            </script>
+        </div>
+	</div>
+	<div class="loading_dark"></div>
+	<div id="loading_mask">
+		<div class="loading_mask">
+			<ul class="anm">
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+	</div>
+	<script language="javascript" src="/static/js/zepto.min.js"></script>
+	<script language="javascript" src="/static/js/fx.js"></script>
+	<script language="javascript" src="/static/js/script.js"></script>
+	
+</body>
+</html>
